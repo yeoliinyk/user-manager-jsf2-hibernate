@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{texts.registration}</title>
+	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+</h:head>
+
+<h:body>
+	<h:outputStylesheet library="css" name="common.css" />
+	<p:growl id="msg" life="5000" />
+	<p:panel id="registration-panel" header="#{texts.registration}"
+		style="margin:5% auto;width:600px;">
+		<h:form enctype="multipart/form-data" prependId="false">
+			<p:panelGrid layout="tabular" styleClass="panelGrid-no-boreder"
+				style="margin: 0 auto;">
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="login" value="#{texts.login}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="login" value="#{registrationBean.user.login}"
+							required="true" requiredMessage="#{texts.needLogin}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column />
+					<p:column>
+						<p:message for="login" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="email" value="#{texts.email}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="email" required="true" label="email" size="40"
+							requiredMessage="#{texts.needEmail}"
+							validatorMessage="#{texts.invalidEmail}"
+							value="#{registrationBean.user.email}">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column />
+					<p:column>
+						<p:message for="email" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="password" value="#{texts.password}:" />
+					</p:column>
+					<p:column>
+						<p:password id="password" required="true" requiredMessage="#{texts.needPassword}"
+							value="#{registrationBean.user.password}" feedback="true" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column />
+					<p:column>
+						<p:message for="password" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="firstname" value="#{texts.firstname}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="firstname"
+							value="#{registrationBean.user.firstName}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="lastname" value="#{texts.lastname}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="lastname"
+							value="#{registrationBean.user.lastName}" />
+					</p:column>
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="sex" value="#{texts.sex}:" />
+					</p:column>
+					<p:column>
+						<p:selectOneRadio id="sex" value="#{registrationBean.user.sex}">
+							<f:selectItem itemLabel="#{texts.male}" itemValue='male' />
+							<f:selectItem itemLabel="#{texts.female}" itemValue='female' />
+						</p:selectOneRadio>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<p:outputLabel for="user_role" value="#{texts.userRole}:" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="user_role" value="#{registrationBean.role}"
+							style="width:230px">
+							<f:selectItem itemLabel="#{texts.user}" itemValue="user" />
+							<f:selectItem itemLabel="#{texts.admin}" itemValue="admin" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<p:outputLabel for="phone-number" value="#{texts.phoneNumber}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="phone-number"
+							value="#{registrationBean.phoneNumber.number}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<h:panelGroup id="registartion-buttons-block" layout="block">
+				<p:button value="#{texts.cancel}" outcome="index" />
+				<p:commandButton action="#{registrationBean.createUser}"
+					value="#{texts.signUp}" style="float:right;"
+					update="registration-panel" />
+			</h:panelGroup>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

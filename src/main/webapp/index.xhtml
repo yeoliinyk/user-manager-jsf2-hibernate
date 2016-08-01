@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>#{texts.headTitle}</title>
+	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+
+</h:head>
+
+<h:body>
+	<h:outputStylesheet library="css" name="common.css" />
+	<h:form prependId="false">
+		<p:growl id="msg" life="5000" />
+		<p:panel id="login-panel" header="#{texts.signIn}"
+			style="width: 420px;margin:50px auto;">
+			<p:panelGrid layout="tabular" styleClass="panelGrid-no-boreder"
+				style="margin:0 auto;width:380px;">
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputText value="#{texts.login}:" />
+					</p:column>
+					<p:column>
+						<p:inputText id="login" value="#{logInBean.login}" required="true"
+							placeholder="#{texts.login}"
+							requiredMessage="#{texts.loginRequired}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="2">
+						<p:message for="login" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputText value="#{texts.password}:" />
+					</p:column>
+					<p:column>
+						<p:password id="password" value="#{logInBean.password}"
+							placeholder="#{texts.password}" required="true" feedback="false"
+							requiredMessage="#{texts.passwordRequired}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="2">
+						<p:message for="password" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column styleClass="right-align">
+						<h:outputLabel for="rememberMe" value="#{texts.rememberMe}:" />
+					</p:column>
+					<p:column>
+						<p:selectBooleanCheckbox id="rememberMe"
+							value="#{logInBean.rememberMe}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="2" style="text-align:center;">
+						<h:link outcome="/registration.xhtml"
+							value="#{texts.registration}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="2">
+						<p:commandButton action="#{logInBean.submit}"
+							value="#{texts.signIn}" update="login-panel"
+							style="margin:0 auto;display:block;" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

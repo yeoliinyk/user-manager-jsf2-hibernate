@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Search User</title>
+	<h:outputScript library="primefaces" name="jquery/jquery.js" />
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="common.css" />
+	<p:panel id="search-panel">
+		<f:facet name="header">
+			<h:outputText styleClass="header-title" value="#{texts.serchHeader}" />
+		</f:facet>
+		<h:panelGroup styleClass="panel-header-button float-right" layout="block">
+			<h:outputText value="Hi, #{request.remoteUser}!"
+				style="padding:0 10px;font:bold 0.9em Verdana;" />
+			<p:commandButton id="logoutButton" value="#{texts.logout}"
+				action="#{searchBean.logout}" />
+		</h:panelGroup>
+		<h:panelGroup styleClass="panel-header-button float-left" layout="block">
+			<p:button id="addNewUser" icon="fa fa-plus" title="Add new user"
+				outcome="registration" />
+		</h:panelGroup>
+		<h:form prependId="false">
+			<h:panelGroup id="search-inputs" layout="block">
+				<p:panelGrid layout="tabular" styleClass="panelGrid-no-boreder">
+					<p:row>
+						<p:column>
+							<p:inputText id="searchByLogin"
+								value="#{searchBean.loginToSearch}"
+								placeholder="#{texts.searchByLogin}">
+								<p:ajax event="valueChange" process="@this" />
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:inputText id="searchByTel" value="#{searchBean.telToSearch}"
+								placeholder="#{texts.searchByTel}" size="25">
+								<p:ajax event="valueChange" process="@this" />
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:commandButton id="searchButton" value="#{texts.searchButton}"
+								action="#{searchBean.search}" update="@form">
+							</p:commandButton>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</h:panelGroup>
+
+			<h:outputText value="#{searchBean.statusString}"
+				style="text-align:center;display:block;margin:10px;"
+				rendered="#{searchBean.users.size() == 0 and !searchBean.renderSearchResult}" />
+
+			<p:dataTable id="userList" var="user" value="#{searchBean.users}"
+				rendered="#{searchBean.users.size() > 0 and searchBean.renderSearchResult}">
+				<p:column headerText="Login" styleClass="search-result-column">
+					<h:outputText value="#{user.login}" />
+				</p:column>
+
+				<p:column headerText="Full Name" styleClass="search-result-column">
+					<h:outputText value="#{user.firstName}" style="padding: 0 5px;" />
+					<h:outputText value="#{user.lastName}" />
+				</p:column>
+
+				<p:column headerText="Phone Number"
+					styleClass="search-result-column">
+					<ui:repeat var="phoneNumber" value="#{user.phoneNumbers}"
+						varStatus="counter">
+						<h:outputText id="phoneNumber#{counter.index}"
+							value="#{phoneNumber.number}" style="display:block;" />
+					</ui:repeat>
+				</p:column>
+
+				<p:column headerText="Email" styleClass="search-result-column">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				<p:column headerText="Edit" style="width:100px;"
+					styleClass="search-result-column">
+					<p:commandButton icon="fa fa-edit" title="Edit user"
+						action="#{searchBean.editUserProfile(user.userId)}"
+						styleClass="control-button" />
+					<p:commandButton icon="fa fa-remove" title="Delete user"
+						action="#{searchBean.deleteUser(user.userId)}"
+						styleClass="control-button" update="@form">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</p:panel>
+</h:body>
+</html>

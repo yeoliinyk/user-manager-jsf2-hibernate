@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+
+#login-panel, #registration-panel, #user-profile-panel {
+	border: 1px solid #A1DCFF;
+}
+
+#login-panel_header, #registration-panel_header, #search-panel_header,
+	#user-profile-panel_header {
+	text-align: center;
+	background: #A1DCFF;
+}
+
+#login-panel_content {
+	padding: 10px;
+}
+
+#registartion-buttons-block {
+	margin: 25px auto;
+	width: 350px;
+}
+
+#search-panel {
+	width: 960px;
+	margin: 5% auto;
+	border: 1px solid #A1DCFF;
+}
+
+#search-panel_header {
+	text-align: center;
+	padding: 5px;
+	font-size: 1.2em;
+}
+
+#search-panel_content {
+	padding: 10px;
+}
+
+#search-inputs {
+	width: 650px;
+	margin: 0 auto;
+}
+
+.search-result-column {
+	padding: 5px !important;
+}
+
+.control-button {
+	width: 35px;
+	height: 32px;
+	margin: 1px 5px;
+}
+
+.panelGrid-no-boreder tr, .panelGrid-no-boreder td {
+	border: none;
+	border-style: none !important;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.panel-header-button {
+	font-size: 0.8em;
+	top: -40px;
+	position: relative;
+}
+
+#userList {
+	margin: 20px 0;
+}
+
+.search-result-column {
+	text-align: center;
+}
+
+#userProfile-buttons {
+	margin: 20px auto;
+	width: 260px;
+}
+
+.right-align {
+	text-align: right;
+}
